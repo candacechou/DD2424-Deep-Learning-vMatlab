@@ -4,6 +4,7 @@ clc,clear all
 [ValX, ValY, Valy] = LoadBatch('data_batch_2.mat');
 [testX, testY, testy] = LoadBatch('test_batch.mat');
 [Flip_X,Flip_Y,Flip_y] = flipdata('data_batch_1.mat');
+% TRAIN WITH MORE DATA
 % [trainX1, trainY1, trainy1] = LoadBatch('data_batch_1.mat');
 % [trainX2, trainY2, trainy2] = LoadBatch('data_batch_2.mat');
 % [trainX3, trainY3, trainy3] = LoadBatch('data_batch_3.mat');
@@ -27,6 +28,8 @@ std_2 = 1/sqrt(m);
 mean_1 = 0 ;
 mean_2 = 0;
 [W,b, lambda]= InitializeParameter(trainX,k_num,std_1,mean_1,std_2,mean_2,l_min,l_max,m);
+
+
 %%%% testing the gradient 
 % [h,P] = EvaluateClassifier(trainX, W,b);
 % [grad_W,grad_b] = ComputeGradients(trainX, trainY, P,h,W,b,lambda);
@@ -81,9 +84,7 @@ t_acc(1,1) = ComputeAccuracy(trainX,trainy,W,b);
 v_cost(1,1) = ComputeCost(ValX,ValY,W,b,lambda);
 v_loss(1,1) = ComputeLoss(ValX,ValY,Valy,W,b);
 v_acc(1,1) = ComputeAccuracy(ValX,Valy,W,b);
-for k=1:n_epoch
-%     [W,b,l,t,etas,t_cost,t_loss,t_acc,v_cost,v_loss,v_acc] = MiniBatchGD(trainX,trainY,n_batch,etas,eta_min,eta_max,n_s,W,b,lambda,l,t,t_cost,t_loss,t_acc,v_cost,v_loss,v_acc);
-    
+for k=1:n_epoch    
 rand_i = randperm(n);
 
 FlipX_shuffle = Flip_X(:,rand_i);
